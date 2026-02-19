@@ -24,5 +24,5 @@ with microsecond resolution.
 
 ``` r
 astro_current_time()
-#> [1] "2026-02-19 13:00:01 UTC"
+#> [1] "2026-02-19 14:09:37 UTC"
 ```
