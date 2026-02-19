@@ -1,67 +1,68 @@
----
-output: github_document
----
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
-)
-```
 
 # astronomy
 
 <!-- badges: start -->
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![CRAN status](https://www.r-pkg.org/badges/version/astronomy)](https://CRAN.R-project.org/package=astronomy)
+
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/astronomy)](https://CRAN.R-project.org/package=astronomy)
 [![R-CMD-check](https://github.com/mitchelloharawild/astronomy/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mitchelloharawild/astronomy/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The astronomy R package provides R bindings to the [Astronomy Engine](https://github.com/cosinekitty/astronomy). It bundles an up-to-date copy of the [Astronomy Engine](https://github.com/cosinekitty/astronomy) C library by Don Cross as a single-file header + source pair. This provides low-level access to the C library so that other R packages can link against it via `LinkingTo` without bundling their own copy.
+The astronomy R package provides R bindings to the [Astronomy
+Engine](https://github.com/cosinekitty/astronomy). It bundles an
+up-to-date copy of the [Astronomy
+Engine](https://github.com/cosinekitty/astronomy) C library by Don Cross
+as a single-file header + source pair. This provides low-level access to
+the C library so that other R packages can link against it via
+`LinkingTo` without bundling their own copy.
 
-[Astronomy Engine](https://github.com/cosinekitty/astronomy) is an open-source library for calculating positions of the Sun, Moon, and planets, and for predicting astronomical events such as rise/set times, lunar phases, equinoxes, solstices, eclipses, and transits. It is based on the [VSOP87](https://en.wikipedia.org/wiki/VSOP_(planets)) planetary model and is accurate to within approximately ±1 arcminute.
+[Astronomy Engine](https://github.com/cosinekitty/astronomy) is an
+open-source library for calculating positions of the Sun, Moon, and
+planets, and for predicting astronomical events such as rise/set times,
+lunar phases, equinoxes, solstices, eclipses, and transits. It is based
+on the [VSOP87](https://en.wikipedia.org/wiki/VSOP_(planets)) planetary
+model and is accurate to within approximately ±1 arcminute.
 
 ## Using the C library from another package
 
 To use the Astronomy Engine C API from another R package:
 
-1. Add `astronomy` to both `Imports` and `LinkingTo` in your `DESCRIPTION`:
+1.  Add `astronomy` to both `Imports` and `LinkingTo` in your
+    `DESCRIPTION`:
 
-    ```
-    Imports: astronomy
-    LinkingTo: astronomy
-    ```
+        Imports: astronomy
+        LinkingTo: astronomy
 
-2. Include the header in your C or C++ source files:
+2.  Include the header in your C or C++ source files:
 
-    ```c
+    ``` c
     #include <astronomy/astronomy.h>
     ```
 
 ### Key types
 
-| Type | Description |
-|---|---|
-| `astro_time_t` | Date/time in both UT and TT scales |
-| `astro_utc_t` | Calendar date and time in UTC |
-| `astro_observer_t` | Geographic location (latitude, longitude, height) |
-| `astro_body_t` | Enumeration of supported celestial bodies |
-| `astro_vector_t` | 3-D Cartesian position vector in AU |
-| `astro_state_vector_t` | Position (AU) and velocity (AU/day) vector |
-| `astro_equatorial_t` | Equatorial coordinates (RA, Dec, distance) |
-| `astro_ecliptic_t` | Heliocentric ecliptic coordinates |
-| `astro_horizon_t` | Topocentric altitude/azimuth coordinates |
-| `astro_rotation_t` | 3×3 rotation matrix for coordinate transforms |
-| `astro_status_t` | Success/error code present on every result struct |
+| Type                   | Description                                       |
+|------------------------|---------------------------------------------------|
+| `astro_time_t`         | Date/time in both UT and TT scales                |
+| `astro_utc_t`          | Calendar date and time in UTC                     |
+| `astro_observer_t`     | Geographic location (latitude, longitude, height) |
+| `astro_body_t`         | Enumeration of supported celestial bodies         |
+| `astro_vector_t`       | 3-D Cartesian position vector in AU               |
+| `astro_state_vector_t` | Position (AU) and velocity (AU/day) vector        |
+| `astro_equatorial_t`   | Equatorial coordinates (RA, Dec, distance)        |
+| `astro_ecliptic_t`     | Heliocentric ecliptic coordinates                 |
+| `astro_horizon_t`      | Topocentric altitude/azimuth coordinates          |
+| `astro_rotation_t`     | 3×3 rotation matrix for coordinate transforms     |
+| `astro_status_t`       | Success/error code present on every result struct |
 
 ### Key functions
 
 | Function | Purpose |
-|---|---|
+|----|----|
 | `Astronomy_MakeTime()` | Construct an `astro_time_t` from calendar components |
 | `Astronomy_CurrentTime()` | `astro_time_t` for the current system time |
 | `Astronomy_AddDays()` | Shift an `astro_time_t` by a number of days |
@@ -84,11 +85,12 @@ To use the Astronomy Engine C API from another R package:
 | `Astronomy_Constellation()` | Constellation containing a given sky position |
 | `Astronomy_GravSimInit()` | Initialise an n-body gravitational simulator |
 
-All functions return status-bearing structs. Always check `status == ASTRO_SUCCESS` before using any other fields of the result.
+All functions return status-bearing structs. Always check
+`status == ASTRO_SUCCESS` before using any other fields of the result.
 
 ### Example
 
-```c
+``` c
 #include <astronomy/astronomy.h>
 
 /* Build a time and a topocentric observer in Sydney */
@@ -124,17 +126,19 @@ astro_seasons_t seasons = Astronomy_Seasons(2025);
 
 ### Supported bodies
 
-The `astro_body_t` enumeration includes: Mercury, Venus, Earth, Mars, Jupiter,
-Saturn, Uranus, Neptune, Pluto, Sun, Moon, Earth/Moon Barycenter (`BODY_EMB`),
-Solar System Barycenter (`BODY_SSB`), and up to 8 user-defined stars
-(`BODY_STAR1`–`BODY_STAR8`, defined with `Astronomy_DefineStar()`).
+The `astro_body_t` enumeration includes: Mercury, Venus, Earth, Mars,
+Jupiter, Saturn, Uranus, Neptune, Pluto, Sun, Moon, Earth/Moon
+Barycenter (`BODY_EMB`), Solar System Barycenter (`BODY_SSB`), and up to
+8 user-defined stars (`BODY_STAR1`–`BODY_STAR8`, defined with
+`Astronomy_DefineStar()`).
 
 ### Coordinate frame rotations
 
-Astronomy Engine provides rotation matrices between all common reference frames:
+Astronomy Engine provides rotation matrices between all common reference
+frames:
 
-| Frames | Function |
-|---|---|
+| Frames    | Function                                                        |
+|-----------|-----------------------------------------------------------------|
 | EQJ ↔ EQD | `Astronomy_Rotation_EQJ_EQD()` / `Astronomy_Rotation_EQD_EQJ()` |
 | EQJ ↔ ECL | `Astronomy_Rotation_EQJ_ECL()` / `Astronomy_Rotation_ECL_EQJ()` |
 | EQD ↔ HOR | `Astronomy_Rotation_EQD_HOR()` / `Astronomy_Rotation_HOR_EQD()` |
@@ -144,15 +148,16 @@ Apply a rotation matrix with `Astronomy_RotateVector()`.
 
 ## Installation
 
-You can install the released version of astronomy from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of astronomy from
+[CRAN](https://CRAN.R-project.org) with:
 
-```r
+``` r
 install.packages("astronomy")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
-```r
+``` r
 # install.packages("pak")
 pak::pak("mitchelloharawild/astronomy")
 ```
