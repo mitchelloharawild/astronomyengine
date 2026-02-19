@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(astronomy)
+library(astronomyengine)
 
-test_check("astronomy")
+test_check("astronomyengine")

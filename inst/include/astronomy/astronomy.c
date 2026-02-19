@@ -1854,8 +1854,13 @@ static astro_observer_t inverse_terra(const double ovec[3], double st)
         {
             if (count > 10)
             {
-                fprintf(stderr, "\nFATAL(inverse_terra): did not converge!\n");
-                exit(1);
+                // fprintf(stderr, "\nFATAL(inverse_terra): did not converge!\n");
+                // exit(1);
+                
+                observer.latitude = NAN;
+                observer.longitude = NAN;
+                observer.height = NAN;
+                return observer;
             }
 
             /* Calculate the error function W(lat). */
