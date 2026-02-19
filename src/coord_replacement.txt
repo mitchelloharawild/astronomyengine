@@ -1,0 +1,96 @@
+// ---------------------------------------------------------------------------
+// Coordinate transformations: rotation matrices
+// ---------------------------------------------------------------------------
+
+// Helper to convert matrix to astro_rotation_t
+static astro_rotation_t matrix_to_rotation(doubles mat) {
+  astro_rotation_t rot;
+  rot.status = ASTRO_SUCCESS;
+  
+  if (mat.size() != 9)
+    stop("Rotation matrix must have exactly 9 elements");
+  
+  // R matrices are column-major, so we need to transpose
+  rot.rot[0][0] = mat[0];  rot.rot[0][1] = mat[3];  rot.rot[0][2] = mat[6];
+  rot.rot[1][0] = mat[1];  rot.rot[1][1] = mat[4];  rot.rot[1][2] = mat[7];
+  rot.rot[2][0] = mat[2];  rot.rot[2][1] = mat[5];  rot.rot[2][2] = mat[8];
+  
+  return rot;
+}
+
+// Helper to convert astro_rotation_t to R matrix
+static writable::doubles rotation_to_matrix(astro_rotation_t rot) {
+  if (rot.status != ASTRO_SUCCESS)
+    stop("Rotation matrix operation failed with status %d", rot.status);
+  
+  // Return as column-major for R
+  writable::doubles mat(9);
+  mat[0] = rot.rot[0][0];  mat[3] = rot.rot[0][1];  mat[6] = rot.rot[0][2];
+  mat[1] = rot.rot[1][0];  mat[4] = rot.rot[1][1];  mat[7] = rot.rot[1][2];
+  mat[2] = rot.rot[2][0];  mat[5] = rot.rot[2][1];  mat[8] = rot.rot[2][2];
+  
+  mat.attr("dim") = writable::integers({3, 3});
+  
+  return mat;
+}
+
+// Helper to convert list to astro_vector_t
+static astro_vector_t list_to_vector(list vec_list) {
+  astro_vector_t vec;
+  vec.status = ASTRO_SUCCESS;
+  vec.x = as_cpp<double>(vec_list["x"]);
+  vec.y = as_cpp<double>(vec_list["y"]);
+  vec.z = as_cpp<double>(vec_list["z"]);
+  vec.t = posix_to_astro(as_cpp<double>(vec_list["t"]));
+  return vec;
+}
+
+// Helper to convert astro_vector_t to R list
+static list vector_to_list(astro_vector_t vec) {
+  if (vec.status != ASTRO_SUCCESS)
+    stop("Vector operation failed with status %d", vec.status);
+  
+  return writable::list({
+    "x"_nm = vec.x,
+    "y"_nm = vec.y,
+    "z"_nm = vec.z,
+    "t"_nm = astro_to_posix(vec.t),
+    "status"_nm = static_cast<int>(vec.status)
+  });
+}
+
+[[cpp11::register]]
+doubles astro_identity_matrix_() {
+  astro_rotation_t rot = Astronomy_IdentityMatrix();
+  return rotation_to_matrix(rot);
+}
+
+[[cpp11::register]]
+doubles astro_inverse_rotation_(doubles rotation) {
+  astro_rotation_t rot = matrix_to_rotation(rotation);
+  astro_rotation_t inv = Astronomy_InverseRotation(rot);
+  return rotation_to_matrix(inv);
+}
+
+[[cpp11::register]]
+doubles astro_combine_rotation_(doubles a, doubles b) {
+  astro_rotation_t rot_a = matrix_to_rotation(a);
+  astro_rotation_t rot_b = matrix_to_rotation(b);
+  astro_rotation_t combined = Astronomy_CombineRotation(rot_a, rot_b);
+  return rotation_to_matrix(combined);
+}
+
+[[cpp11::register]]
+doubles astro_pivot_(doubles rotation, int axis, double angle) {
+  astro_rotation_t rot = matrix_to_rotation(rotation);
+  astro_rotation_t pivoted = Astronomy_Pivot(rot, axis, angle);
+  return rotation_to_matrix(pivoted);
+}
+
+[[cpp11::register]]
+list astro_rotate_vector_(doubles rotation, list vector) {
+  astro_rotation_t rot = matrix_to_rotation(rotation);
+  astro_vector_t vec = list_to_vector(vector);
+  astro_vector_t rotated = Astronomy_RotateVector(rot, vec);
+  return vector_to_list(rotated);
+}
