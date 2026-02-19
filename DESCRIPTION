@@ -1,4 +1,4 @@
-Package: astronomy
+Package: astronomyengine
 Title: R Bindings to the 'Astronomy Engine' C Library
 Version: 0.0.0.9000
 Authors@R:
@@ -20,8 +20,8 @@ Description: Provides access to the 'Astronomy Engine' C library
     bundles the single-file C source so that other R packages can link against
     it via 'LinkingTo' without shipping their own copy.
 License: MIT + file LICENSE
-URL: https://github.com/mitchelloharawild/astronomy
-BugReports: https://github.com/mitchelloharawild/astronomy/issues
+URL: https://github.com/mitchelloharawild/astronomyengine
+BugReports: https://github.com/mitchelloharawild/astronomyengine/issues
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

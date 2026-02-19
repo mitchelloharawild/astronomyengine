@@ -1,18 +1,18 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# astronomy
+# astronomyengine
 
 <!-- badges: start -->
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN
-status](https://www.r-pkg.org/badges/version/astronomy)](https://CRAN.R-project.org/package=astronomy)
-[![R-CMD-check](https://github.com/mitchelloharawild/astronomy/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mitchelloharawild/astronomy/actions/workflows/R-CMD-check.yaml)
+status](https://www.r-pkg.org/badges/version/astronomyengine)](https://CRAN.R-project.org/package=astronomyengine)
+[![R-CMD-check](https://github.com/mitchelloharawild/astronomyengine/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mitchelloharawild/astronomyengine/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The astronomy R package provides R bindings to the [Astronomy
+The astronomyengine R package provides R bindings to the [Astronomy
 Engine](https://github.com/cosinekitty/astronomy). It bundles an
 up-to-date copy of the [Astronomy
 Engine](https://github.com/cosinekitty/astronomy) C library by Don Cross
@@ -31,11 +31,11 @@ model and is accurate to within approximately ±1 arcminute.
 
 To use the Astronomy Engine C API from another R package:
 
-1.  Add `astronomy` to both `Imports` and `LinkingTo` in your
+1.  Add `astronomyengine` to both `Imports` and `LinkingTo` in your
     `DESCRIPTION`:
 
-        Imports: astronomy
-        LinkingTo: astronomy
+        Imports: astronomyengine
+        LinkingTo: astronomyengine
 
 2.  Include the header in your C or C++ source files:
 
@@ -148,16 +148,16 @@ Apply a rotation matrix with `Astronomy_RotateVector()`.
 
 ## Installation
 
-You can install the released version of astronomy from
+You can install the released version of astronomyengine from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-install.packages("astronomy")
+install.packages("astronomyengine")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("pak")
-pak::pak("mitchelloharawild/astronomy")
+pak::pak("mitchelloharawild/astronomyengine")
 ```
