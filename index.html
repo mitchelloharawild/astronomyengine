@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>R Bindings to the Astronomy Engine C Library • astronomy</title>
+<title>R Bindings to the Astronomy Engine C Library • astronomyengine</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -20,7 +20,7 @@
 
     <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
 
-    <a class="navbar-brand me-2" href="index.html">astronomy</a>
+    <a class="navbar-brand me-2" href="index.html">astronomyengine</a>
 
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
 
@@ -37,7 +37,7 @@
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
 </form></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/mitchelloharawild/astronomy/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/mitchelloharawild/astronomyengine/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -46,11 +46,11 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="astronomy">astronomy<a class="anchor" aria-label="anchor" href="#astronomy"></a>
+<div class="page-header"><h1 id="astronomyengine">astronomyengine<a class="anchor" aria-label="anchor" href="#astronomyengine"></a>
 </h1></div>
 <!-- badges: start -->
 
-<p>The astronomy R package provides R bindings to the <a href="https://github.com/cosinekitty/astronomy" class="external-link">Astronomy Engine</a>. It bundles an up-to-date copy of the <a href="https://github.com/cosinekitty/astronomy" class="external-link">Astronomy Engine</a> C library by Don Cross as a single-file header + source pair. This provides low-level access to the C library so that other R packages can link against it via <code>LinkingTo</code> without bundling their own copy.</p>
+<p>The astronomyengine R package provides R bindings to the <a href="https://github.com/cosinekitty/astronomy" class="external-link">Astronomy Engine</a>. It bundles an up-to-date copy of the <a href="https://github.com/cosinekitty/astronomy" class="external-link">Astronomy Engine</a> C library by Don Cross as a single-file header + source pair. This provides low-level access to the C library so that other R packages can link against it via <code>LinkingTo</code> without bundling their own copy.</p>
 <p><a href="https://github.com/cosinekitty/astronomy" class="external-link">Astronomy Engine</a> is an open-source library for calculating positions of the Sun, Moon, and planets, and for predicting astronomical events such as rise/set times, lunar phases, equinoxes, solstices, eclipses, and transits. It is based on the <a href="https://en.wikipedia.org/wiki/VSOP_(planets)" class="external-link">VSOP87</a> planetary model and is accurate to within approximately ±1 arcminute.</p>
 <div class="section level2">
 <h2 id="using-the-c-library-from-another-package">Using the C library from another package<a class="anchor" aria-label="anchor" href="#using-the-c-library-from-another-package"></a>
@@ -58,9 +58,9 @@
 <p>To use the Astronomy Engine C API from another R package:</p>
 <ol style="list-style-type: decimal">
 <li>
-<p>Add <code>astronomy</code> to both <code>Imports</code> and <code>LinkingTo</code> in your <code>DESCRIPTION</code>:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>Imports<span class="sc">:</span> astronomy</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>LinkingTo<span class="sc">:</span> astronomy</span></code></pre></div>
+<p>Add <code>astronomyengine</code> to both <code>Imports</code> and <code>LinkingTo</code> in your <code>DESCRIPTION</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>Imports<span class="sc">:</span> astronomyengine</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>LinkingTo<span class="sc">:</span> astronomyengine</span></code></pre></div>
 </li>
 <li>
 <p>Include the header in your C or C++ source files:</p>
@@ -316,20 +316,20 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the released version of astronomy from <a href="https://CRAN.R-project.org" class="external-link">CRAN</a> with:</p>
+<p>You can install the released version of astronomyengine from <a href="https://CRAN.R-project.org" class="external-link">CRAN</a> with:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"astronomy"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"astronomyengine"</span><span class="op">)</span></span></code></pre></div>
 <p>And the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
-<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"mitchelloharawild/astronomy"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"mitchelloharawild/astronomyengine"</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/mitchelloharawild/astronomy/" class="external-link">Browse source code</a></li>
-<li><a href="https://github.com/mitchelloharawild/astronomy/issues" class="external-link">Report a bug</a></li>
+<li><a href="https://github.com/mitchelloharawild/astronomyengine/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/mitchelloharawild/astronomyengine/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
@@ -353,7 +353,7 @@
 <div class="citation">
 <h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="authors.html#citation">Citing astronomy</a></li>
+<li><a href="authors.html#citation">Citing astronomyengine</a></li>
 </ul>
 </div>
 
@@ -370,8 +370,8 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
-<li><a href="https://CRAN.R-project.org/package=astronomy" class="external-link"><img src="https://www.r-pkg.org/badges/version/astronomy" alt="CRAN status"></a></li>
-<li><a href="https://github.com/mitchelloharawild/astronomy/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/mitchelloharawild/astronomy/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://CRAN.R-project.org/package=astronomyengine" class="external-link"><img src="https://www.r-pkg.org/badges/version/astronomyengine" alt="CRAN status"></a></li>
+<li><a href="https://github.com/mitchelloharawild/astronomyengine/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/mitchelloharawild/astronomyengine/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
 

@@ -11,16 +11,16 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/mitchelloharawild/astronomy/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/mitchelloharawild/astronomyengine/blob/main/DESCRIPTION)
 
-O'Hara-Wild M, Cross D (2026). *astronomy: R Bindings to the 'Astronomy
-Engine' C Library*. R package version 0.0.0.9000,
-<https://github.com/mitchelloharawild/astronomy>.
+O'Hara-Wild M, Cross D (2026). *astronomyengine: R Bindings to the
+'Astronomy Engine' C Library*. R package version 0.0.0.9000,
+<https://github.com/mitchelloharawild/astronomyengine>.
 
     @Manual{,
-      title = {astronomy: R Bindings to the 'Astronomy Engine' C Library},
+      title = {astronomyengine: R Bindings to the 'Astronomy Engine' C Library},
       author = {Mitchell O'Hara-Wild and Don Cross},
       year = {2026},
       note = {R package version 0.0.0.9000},
-      url = {https://github.com/mitchelloharawild/astronomy},
+      url = {https://github.com/mitchelloharawild/astronomyengine},
     }
