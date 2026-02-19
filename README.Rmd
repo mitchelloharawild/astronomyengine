@@ -44,13 +44,13 @@ pak::pak("mitchelloharawild/astronomyengine")
 
 ```{r}
 library(astronomyengine)
-```
-
-All functions accept a `POSIXct` time in UTC. Here we use a reference time of 2025-02-19 12:00 UTC for all examples.
-
-```{r}
+# All functions accept a `POSIXct` time as input.
+# Here we use a reference time of 2025-02-19 12:00 UTC for all examples.
 now <- as.POSIXct("2025-02-19 12:00:00", tz = "UTC")
 ```
+
+The R functions and documentation are designed to be as similar as possible to the C API. Therefore the most comprehensive resource for learning how to use the package is the [Astronomy Engine C API documentation](https://github.com/cosinekitty/astronomy/tree/master/source/c). If you need support for how to use the package, I suggest that you also search for information about the underlying C library.
+
 
 ### Next sunrise
 
