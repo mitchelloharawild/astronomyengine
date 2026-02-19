@@ -47,6 +47,7 @@ reference:
       - astro_search_rise_set
       - astro_search_altitude
       - astro_search_hour_angle
+      - astro_hour_angle
 
   - title: "Moon phases"
     desc: "Calculate and search for specific Moon phases."
