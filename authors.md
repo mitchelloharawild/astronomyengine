@@ -2,8 +2,8 @@
 
 ## Authors
 
-- **Mitchell O'Hara-Wild**. Author, maintainer.
-  [](https://orcid.org/0000-0001-6729-7695)
+- **[Mitchell O'Hara-Wild](https://mitchelloharawild.com)**. Author,
+  maintainer. [](https://orcid.org/0000-0001-6729-7695)
 
 - **Don Cross**. Author, copyright holder.  
   Author of the bundled Astronomy Engine C library

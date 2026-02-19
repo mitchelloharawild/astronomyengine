@@ -1,4 +1,4 @@
 # License
 
     YEAR: 2026
-    COPYRIGHT HOLDER: astronomy authors
+    COPYRIGHT HOLDER: astronomyengine authors
