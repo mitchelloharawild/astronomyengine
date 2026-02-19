@@ -6,8 +6,12 @@
 \usage{
 astro_rotation_EQJ_ECL(time_posix)
 }
+\arguments{
+\item{time_posix}{A POSIXct object specifying the date and time at which the Earth's equator
+defines the target orientation.}
+}
 \value{
-A rotation matrix that converts EQJ to ECL.
+A rotation matrix that converts EQJ to ECL at the specified time.
 }
 \description{
 Calculates a rotation matrix from J2000 mean equator (EQJ) to J2000 mean
@@ -22,6 +26,7 @@ for converting from one orientation to another.
 \strong{Target}: ECL = ecliptic system, using equator at J2000 epoch.
 }
 \examples{
-astro_rotation_EQJ_ECL()
+time <- as.POSIXct("2024-01-01", tz = "UTC")
+astro_rotation_EQJ_ECL(time)
 
 }

@@ -10,11 +10,16 @@
 #'
 #'   **Target**: ECL = ecliptic system, using equator at J2000 epoch.
 #'
+#' @param time_posix
+#'   A POSIXct object specifying the date and time at which the Earth's equator
+#'   defines the target orientation.
+#'
 #' @return
-#'   A rotation matrix that converts EQJ to ECL.
+#'   A rotation matrix that converts EQJ to ECL at the specified time.
 #'
 #' @examples
-#' astro_rotation_EQJ_ECL()
+#' time <- as.POSIXct("2024-01-01", tz = "UTC")
+#' astro_rotation_EQJ_ECL(time)
 #'
 #' @export
 astro_rotation_EQJ_ECL <- function(time_posix) {

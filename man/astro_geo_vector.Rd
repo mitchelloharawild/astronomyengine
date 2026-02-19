@@ -36,5 +36,5 @@ direction of the body to be shifted due to transverse movement of the Earth.
 }
 \examples{
 time <- as.POSIXct("2025-02-19 22:10:12", tz = "UTC")
-astro_geo_vector("MARS", time)
+astro_geo_vector(astro_body["MARS"], time)
 }

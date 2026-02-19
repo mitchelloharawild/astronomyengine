@@ -293,7 +293,7 @@ astro_pair_longitude <- function(body1, body2, time) {
 #' @export
 #' @examples
 #' time <- as.POSIXct("2025-02-19 22:10:12", tz = "UTC")
-#' astro_geo_vector("MARS", time)
+#' astro_geo_vector(astro_body["MARS"], time)
 astro_geo_vector <- function(body, time, aberration = "ABERRATION") {
   aberration_code <- switch(
     aberration,
