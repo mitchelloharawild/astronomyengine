@@ -1,163 +1,173 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+
 
 # astronomyengine
 
 <!-- badges: start -->
-
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/astronomyengine)](https://CRAN.R-project.org/package=astronomyengine)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![CRAN status](https://www.r-pkg.org/badges/version/astronomyengine)](https://CRAN.R-project.org/package=astronomyengine)
 [![R-CMD-check](https://github.com/mitchelloharawild/astronomyengine/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mitchelloharawild/astronomyengine/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The astronomyengine R package provides R bindings to the [Astronomy
-Engine](https://github.com/cosinekitty/astronomy). It bundles an
-up-to-date copy of the [Astronomy
-Engine](https://github.com/cosinekitty/astronomy) C library by Don Cross
-as a single-file header + source pair. This provides low-level access to
-the C library so that other R packages can link against it via
-`LinkingTo` without bundling their own copy.
+The astronomyengine R package provides R bindings to the [Astronomy Engine](https://github.com/cosinekitty/astronomy). It bundles an up-to-date copy of the [Astronomy Engine](https://github.com/cosinekitty/astronomy) C library by Don Cross as a single-file header + source pair. This provides low-level access to the C library so that other R packages can link against it via `LinkingTo` without bundling their own copy.
 
-[Astronomy Engine](https://github.com/cosinekitty/astronomy) is an
-open-source library for calculating positions of the Sun, Moon, and
-planets, and for predicting astronomical events such as rise/set times,
-lunar phases, equinoxes, solstices, eclipses, and transits. It is based
-on the [VSOP87](https://en.wikipedia.org/wiki/VSOP_(planets)) planetary
-model and is accurate to within approximately ±1 arcminute.
-
-## Using the C library from another package
-
-To use the Astronomy Engine C API from another R package:
-
-1.  Add `astronomyengine` to both `Imports` and `LinkingTo` in your
-    `DESCRIPTION`:
-
-        Imports: astronomyengine
-        LinkingTo: astronomyengine
-
-2.  Include the header in your C or C++ source files:
-
-    ``` c
-    #include <astronomy/astronomy.h>
-    ```
-
-### Key types
-
-| Type                   | Description                                       |
-|------------------------|---------------------------------------------------|
-| `astro_time_t`         | Date/time in both UT and TT scales                |
-| `astro_utc_t`          | Calendar date and time in UTC                     |
-| `astro_observer_t`     | Geographic location (latitude, longitude, height) |
-| `astro_body_t`         | Enumeration of supported celestial bodies         |
-| `astro_vector_t`       | 3-D Cartesian position vector in AU               |
-| `astro_state_vector_t` | Position (AU) and velocity (AU/day) vector        |
-| `astro_equatorial_t`   | Equatorial coordinates (RA, Dec, distance)        |
-| `astro_ecliptic_t`     | Heliocentric ecliptic coordinates                 |
-| `astro_horizon_t`      | Topocentric altitude/azimuth coordinates          |
-| `astro_rotation_t`     | 3×3 rotation matrix for coordinate transforms     |
-| `astro_status_t`       | Success/error code present on every result struct |
-
-### Key functions
-
-| Function | Purpose |
-|----|----|
-| `Astronomy_MakeTime()` | Construct an `astro_time_t` from calendar components |
-| `Astronomy_CurrentTime()` | `astro_time_t` for the current system time |
-| `Astronomy_AddDays()` | Shift an `astro_time_t` by a number of days |
-| `Astronomy_MakeObserver()` | Construct an `astro_observer_t` |
-| `Astronomy_GeoVector()` | Geocentric Cartesian position of a body |
-| `Astronomy_Equator()` | Equatorial (RA/Dec) coordinates of a body |
-| `Astronomy_Horizon()` | Topocentric altitude/azimuth for an observer |
-| `Astronomy_Seasons()` | Equinox and solstice times for a given year |
-| `Astronomy_SearchRiseSetEx()` | Next rise or set time of a body |
-| `Astronomy_SearchMoonPhase()` | Next occurrence of a given lunar phase angle |
-| `Astronomy_SearchMoonQuarter()` | Next new/quarter/full moon |
-| `Astronomy_Illumination()` | Visual magnitude and illuminated fraction |
-| `Astronomy_SearchLunarEclipse()` | Next lunar eclipse |
-| `Astronomy_SearchGlobalSolarEclipse()` | Next global solar eclipse |
-| `Astronomy_SearchLocalSolarEclipse()` | Next solar eclipse for an observer |
-| `Astronomy_SearchTransit()` | Next transit of Mercury or Venus |
-| `Astronomy_SearchMaxElongation()` | Next maximum elongation of an inner planet |
-| `Astronomy_JupiterMoons()` | State vectors for Io, Europa, Ganymede, Callisto |
-| `Astronomy_Libration()` | Lunar libration angles |
-| `Astronomy_Constellation()` | Constellation containing a given sky position |
-| `Astronomy_GravSimInit()` | Initialise an n-body gravitational simulator |
-
-All functions return status-bearing structs. Always check
-`status == ASTRO_SUCCESS` before using any other fields of the result.
-
-### Example
-
-``` c
-#include <astronomy/astronomy.h>
-
-/* Build a time and a topocentric observer in Sydney */
-astro_time_t     t   = Astronomy_MakeTime(2025, 6, 21, 12, 0, 0.0);
-astro_observer_t obs = Astronomy_MakeObserver(-33.8688, 151.2093, 0.0);
-
-/* Equatorial coordinates of Mars (of-date, with aberration) */
-astro_equatorial_t eq = Astronomy_Equator(
-    BODY_MARS, &t, obs, EQUATOR_OF_DATE, ABERRATION
-);
-if (eq.status == ASTRO_SUCCESS) {
-    /* eq.ra   -> right ascension in sidereal hours  */
-    /* eq.dec  -> declination in degrees             */
-    /* eq.dist -> distance in AU                     */
-}
-
-/* Convert to altitude/azimuth for the same observer */
-astro_horizon_t hor = Astronomy_Horizon(
-    &t, obs, eq.ra, eq.dec, REFRACTION_NORMAL
-);
-/* hor.altitude -> degrees above (+) or below (-) horizon */
-/* hor.azimuth  -> degrees clockwise from north            */
-
-/* Find the next sunrise at the same location */
-astro_search_result_t rise = Astronomy_SearchRiseSetEx(
-    BODY_SUN, obs, DIRECTION_RISE, t, 1.0, 0.0
-);
-
-/* Seasons for 2025 */
-astro_seasons_t seasons = Astronomy_Seasons(2025);
-/* seasons.mar_equinox, jun_solstice, sep_equinox, dec_solstice */
-```
-
-### Supported bodies
-
-The `astro_body_t` enumeration includes: Mercury, Venus, Earth, Mars,
-Jupiter, Saturn, Uranus, Neptune, Pluto, Sun, Moon, Earth/Moon
-Barycenter (`BODY_EMB`), Solar System Barycenter (`BODY_SSB`), and up to
-8 user-defined stars (`BODY_STAR1`–`BODY_STAR8`, defined with
-`Astronomy_DefineStar()`).
-
-### Coordinate frame rotations
-
-Astronomy Engine provides rotation matrices between all common reference
-frames:
-
-| Frames    | Function                                                        |
-|-----------|-----------------------------------------------------------------|
-| EQJ ↔ EQD | `Astronomy_Rotation_EQJ_EQD()` / `Astronomy_Rotation_EQD_EQJ()` |
-| EQJ ↔ ECL | `Astronomy_Rotation_EQJ_ECL()` / `Astronomy_Rotation_ECL_EQJ()` |
-| EQD ↔ HOR | `Astronomy_Rotation_EQD_HOR()` / `Astronomy_Rotation_HOR_EQD()` |
-| EQJ ↔ GAL | `Astronomy_Rotation_EQJ_GAL()` / `Astronomy_Rotation_GAL_EQJ()` |
-
-Apply a rotation matrix with `Astronomy_RotateVector()`.
+[Astronomy Engine](https://github.com/cosinekitty/astronomy) is an open-source library for calculating positions of the Sun, Moon, and planets, and for predicting astronomical events such as rise/set times, lunar phases, equinoxes, solstices, eclipses, and transits. It is based on the [VSOP87](https://en.wikipedia.org/wiki/VSOP_(planets)) planetary model and is accurate to within approximately ±1 arcminute.
 
 ## Installation
 
-You can install the released version of astronomyengine from
-[CRAN](https://CRAN.R-project.org) with:
+You can install the released version of astronomyengine from [CRAN](https://CRAN.R-project.org) with:
 
-``` r
+```r
 install.packages("astronomyengine")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
-``` r
+```r
 # install.packages("pak")
 pak::pak("mitchelloharawild/astronomyengine")
 ```
+
+## Usage
+
+
+``` r
+library(astronomyengine)
+```
+
+All functions accept a `POSIXct` time in UTC. Here we use a reference time of 2025-02-19 12:00 UTC for all examples.
+
+
+``` r
+now <- as.POSIXct("2025-02-19 12:00:00", tz = "UTC")
+```
+
+### Next sunrise
+
+Find the next sunrise at a given location — here, Sydney Observatory (latitude −33.87°, longitude 151.21°):
+
+
+``` r
+astro_search_rise_set(
+  astro_body[["SUN"]], now,
+  latitude = -33.8688, longitude = 151.2093
+)
+#> [1] "2025-02-19 19:34:50 UTC"
+```
+
+### Current moon phase
+
+`astro_moon_phase()` returns the Moon's phase as an angle in degrees: 0° = new moon, 90° = first quarter, 180° = full moon, 270° = third quarter.
+
+
+``` r
+astro_moon_phase(now)
+#> [1] 256.4968
+```
+
+### Next full moon
+
+Search for the next time the Moon reaches a specific phase angle. Use 180° for a full moon:
+
+
+``` r
+astro_search_moon_phase(180, now, limit_days = 30)
+#> [1] "2025-03-14 06:55:19 UTC"
+```
+
+### Solar eclipse
+
+Find the next solar eclipse visible anywhere on Earth:
+
+
+``` r
+eclipse <- search_global_solar_eclipse(now)
+eclipse
+#> $status
+#> [1] 0
+#> 
+#> $kind
+#> [1] 2
+#> 
+#> $peak
+#> [1] "2025-03-29 10:47:25 UTC"
+#> 
+#> $distance
+#> [1] 6637.035
+#> 
+#> $latitude
+#> [1] NaN
+#> 
+#> $longitude
+#> [1] NaN
+```
+
+The `kind` field indicates the eclipse type: 0 = partial, 1 = annular, 2 = total. This total solar eclipse peaks on 2025-03-29.
+
+> **Note:** `latitude` and `longitude` in the eclipse result indicate the point of greatest eclipse on Earth's surface. These are only populated for annular eclipses; for total eclipses they will be `NaN`.
+
+### Transit of Mercury
+
+A transit occurs when Mercury passes directly between the Earth and the Sun. These are rare — the next one after February 2025 is in November 2032:
+
+
+``` r
+astro_search_transit(astro_body[["MERCURY"]], now)
+#> $start
+#> [1] "2032-11-13 06:41:48 UTC"
+#> 
+#> $peak
+#> [1] "2032-11-13 08:54:14 UTC"
+#> 
+#> $finish
+#> [1] "2032-11-13 11:06:53 UTC"
+#> 
+#> $separation
+#> [1] 9.594123
+```
+
+### Equinoxes and solstices
+
+`astro_seasons()` returns all four seasonal turning points for a given year:
+
+
+``` r
+astro_seasons(2025)
+#> $mar_equinox
+#> [1] "2025-03-20 09:01:26 UTC"
+#> 
+#> $jun_solstice
+#> [1] "2025-06-21 02:42:17 UTC"
+#> 
+#> $sep_equinox
+#> [1] "2025-09-22 18:19:34 UTC"
+#> 
+#> $dec_solstice
+#> [1] "2025-12-21 15:03:03 UTC"
+```
+
+## Using the C library from another package
+
+To use the Astronomy Engine C API from another R package:
+
+1. Add `astronomyengine` to both `Imports` and `LinkingTo` in your `DESCRIPTION`:
+
+    ```
+    Imports: astronomyengine
+    LinkingTo: astronomyengine
+    ```
+
+2. Include the header in your C or C++ source files:
+
+    ```c
+    #include <astronomy/astronomy.h>
+    ```
+
+### Key types, functions, and more
+
+For detailed documentation of the C API, including key types, functions, supported bodies, and coordinate frame rotations, see the [Astronomy Engine C API documentation](https://github.com/cosinekitty/astronomy/tree/master/source/c).
