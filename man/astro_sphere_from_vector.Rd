@@ -17,10 +17,12 @@ astro_sphere_from_vector(vector)
 }
 \value{
 A list with components:
+\describe{
 \item{lat}{Latitude angle: -90..+90 degrees}
 \item{lon}{Longitude angle: 0..360 degrees}
 \item{dist}{Distance in AU}
 \item{status}{Status code (0 = success)}
+}
 
 A list representing spherical coordinates with elements:
 \itemize{

@@ -11,10 +11,12 @@ astro_rotate_vector(rotation, vector)
 is to be changed}
 
 \item{vector}{The vector whose orientation is to be changed. A list with components:
+\describe{
 \item{x}{The Cartesian x-coordinate in AU}
 \item{y}{The Cartesian y-coordinate in AU}
 \item{z}{The Cartesian z-coordinate in AU}
-\item{t}{The date and time (POSIXct) at which this vector is valid}}
+\item{t}{The date and time (POSIXct) at which this vector is valid}
+}}
 }
 \value{
 A vector in the orientation specified by \code{rotation}

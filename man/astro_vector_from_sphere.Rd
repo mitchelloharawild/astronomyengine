@@ -20,11 +20,13 @@ astro_vector_from_sphere(sphere, time)
 }
 \value{
 A list representing a vector with components:
+\describe{
 \item{x}{The Cartesian x-coordinate in AU}
 \item{y}{The Cartesian y-coordinate in AU}
 \item{z}{The Cartesian z-coordinate in AU}
 \item{t}{The date and time (POSIXct) at which this vector is valid}
 \item{status}{Status code (0 = success)}
+}
 
 A list representing a Cartesian vector with elements:
 \itemize{

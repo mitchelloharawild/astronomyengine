@@ -6,8 +6,10 @@
 #' create a custom rotation matrix.
 #'
 #' @return A list with components:
-#'   \item{rot}{A 3x3 rotation matrix}
-#'   \item{status}{Status code (0 = success)}
+#'   \describe{
+#'     \item{rot}{A 3x3 rotation matrix}
+#'     \item{status}{Status code (0 = success)}
+#'   }
 #'
 #' @export
 #' @examples
@@ -98,10 +100,12 @@ astro_pivot <- function(rotation, axis, angle) {
 #' @param rotation A rotation matrix that specifies how the orientation of the vector
 #'   is to be changed
 #' @param vector The vector whose orientation is to be changed. A list with components:
-#'   \item{x}{The Cartesian x-coordinate in AU}
-#'   \item{y}{The Cartesian y-coordinate in AU}
-#'   \item{z}{The Cartesian z-coordinate in AU}
-#'   \item{t}{The date and time (POSIXct) at which this vector is valid}
+#'   \describe{
+#'     \item{x}{The Cartesian x-coordinate in AU}
+#'     \item{y}{The Cartesian y-coordinate in AU}
+#'     \item{z}{The Cartesian z-coordinate in AU}
+#'     \item{t}{The date and time (POSIXct) at which this vector is valid}
+#'   }
 #'
 #' @return A vector in the orientation specified by `rotation`
 #'
@@ -122,17 +126,21 @@ astro_rotate_vector <- function(rotation, vector) {
 #' includes the time, as required by the vector type.
 #'
 #' @param sphere A list with components:
-#'   \item{lat}{Latitude angle: -90..+90 degrees}
-#'   \item{lon}{Longitude angle: 0..360 degrees}
-#'   \item{dist}{Distance in AU}
+#'   \describe{
+#'     \item{lat}{Latitude angle: -90..+90 degrees}
+#'     \item{lon}{Longitude angle: 0..360 degrees}
+#'     \item{dist}{Distance in AU}
+#'   }
 #' @param time POSIXct time at which the coordinates are valid
 #'
 #' @return A list representing a vector with components:
-#'   \item{x}{The Cartesian x-coordinate in AU}
-#'   \item{y}{The Cartesian y-coordinate in AU}
-#'   \item{z}{The Cartesian z-coordinate in AU}
-#'   \item{t}{The date and time (POSIXct) at which this vector is valid}
-#'   \item{status}{Status code (0 = success)}
+#'   \describe{
+#'     \item{x}{The Cartesian x-coordinate in AU}
+#'     \item{y}{The Cartesian y-coordinate in AU}
+#'     \item{z}{The Cartesian z-coordinate in AU}
+#'     \item{t}{The date and time (POSIXct) at which this vector is valid}
+#'     \item{status}{Status code (0 = success)}
+#'   }
 #'
 #' @export
 #' @examples
@@ -153,16 +161,20 @@ astro_vector_from_sphere <- function(sphere, time) {
 #' Given a Cartesian vector, returns latitude, longitude, and distance.
 #'
 #' @param vector A list with components:
-#'   \item{x}{The Cartesian x-coordinate in AU}
-#'   \item{y}{The Cartesian y-coordinate in AU}
-#'   \item{z}{The Cartesian z-coordinate in AU}
-#'   \item{t}{The date and time (POSIXct) at which this vector is valid}
+#'   \describe{
+#'     \item{x}{The Cartesian x-coordinate in AU}
+#'     \item{y}{The Cartesian y-coordinate in AU}
+#'     \item{z}{The Cartesian z-coordinate in AU}
+#'     \item{t}{The date and time (POSIXct) at which this vector is valid}
+#'   }
 #'
 #' @return A list with components:
-#'   \item{lat}{Latitude angle: -90..+90 degrees}
-#'   \item{lon}{Longitude angle: 0..360 degrees}
-#'   \item{dist}{Distance in AU}
-#'   \item{status}{Status code (0 = success)}
+#'   \describe{
+#'     \item{lat}{Latitude angle: -90..+90 degrees}
+#'     \item{lon}{Longitude angle: 0..360 degrees}
+#'     \item{dist}{Distance in AU}
+#'     \item{status}{Status code (0 = success)}
+#'   }
 #'
 #' @export
 #' @examples
@@ -179,17 +191,21 @@ astro_sphere_from_vector <- function(vector) {
 #' (right ascension and declination).
 #'
 #' @param vector A list with components:
-#'   \item{x}{The Cartesian x-coordinate in AU}
-#'   \item{y}{The Cartesian y-coordinate in AU}
-#'   \item{z}{The Cartesian z-coordinate in AU}
-#'   \item{t}{The date and time (POSIXct) at which this vector is valid}
+#'   \describe{
+#'     \item{x}{The Cartesian x-coordinate in AU}
+#'     \item{y}{The Cartesian y-coordinate in AU}
+#'     \item{z}{The Cartesian z-coordinate in AU}
+#'     \item{t}{The date and time (POSIXct) at which this vector is valid}
+#'   }
 #'
 #' @return A list with components:
-#'   \item{ra}{Right ascension in sidereal hours}
-#'   \item{dec}{Declination in degrees}
-#'   \item{dist}{Distance to the celestial body in AU}
-#'   \item{vec}{Equatorial coordinates in Cartesian vector form}
-#'   \item{status}{Status code (0 = success)}
+#'   \describe{
+#'     \item{ra}{Right ascension in sidereal hours}
+#'     \item{dec}{Declination in degrees}
+#'     \item{dist}{Distance to the celestial body in AU}
+#'     \item{vec}{Equatorial coordinates in Cartesian vector form}
+#'     \item{status}{Status code (0 = success)}
+#'   }
 #'
 #' @export
 #' @examples
@@ -207,19 +223,23 @@ astro_equator_from_vector <- function(vector) {
 #' The returned vector is in the horizontal system: x = north, y = west, z = zenith (up).
 #'
 #' @param sphere A list with components:
-#'   \item{lat}{Refracted altitude angle in degrees}
-#'   \item{lon}{Azimuth in degrees clockwise from north}
-#'   \item{dist}{Distance from the observer to the object in AU}
+#'   \describe{
+#'     \item{lat}{Refracted altitude angle in degrees}
+#'     \item{lon}{Azimuth in degrees clockwise from north}
+#'     \item{dist}{Distance from the observer to the object in AU}
+#'   }
 #' @param time POSIXct time of the observation
 #' @param refraction Refraction option (0 = REFRACTION_NONE, 1 = REFRACTION_NORMAL, 2 = REFRACTION_JPLHOR).
 #'   This specifies how refraction is to be removed from the altitude stored in `sphere$lat`.
 #'
 #' @return A list representing a vector in the horizontal system with components:
-#'   \item{x}{North component in AU}
-#'   \item{y}{West component in AU}
-#'   \item{z}{Zenith (up) component in AU}
-#'   \item{t}{The date and time (POSIXct)}
-#'   \item{status}{Status code (0 = success)}
+#'   \describe{
+#'     \item{x}{North component in AU}
+#'     \item{y}{West component in AU}
+#'     \item{z}{Zenith (up) component in AU}
+#'     \item{t}{The date and time (POSIXct)}
+#'     \item{status}{Status code (0 = success)}
+#'   }
 #'
 #' @export
 #' @examples
@@ -258,20 +278,24 @@ astro_vector_from_horizon <- function(sphere, time, refraction = 1L) {
 #' astronomical units (AU).
 #'
 #' @param vector A list with components:
-#'   \item{x}{North component in AU}
-#'   \item{y}{West component in AU}
-#'   \item{z}{Zenith (up) component in AU}
-#'   \item{t}{The date and time (POSIXct)}
+#'   \describe{
+#'     \item{x}{North component in AU}
+#'     \item{y}{West component in AU}
+#'     \item{z}{Zenith (up) component in AU}
+#'     \item{t}{The date and time (POSIXct)}
+#'   }
 #' @param refraction Refraction option (0 = REFRACTION_NONE, 1 = REFRACTION_NORMAL, 2 = REFRACTION_JPLHOR).
 #'   REFRACTION_NORMAL: correct altitude for atmospheric refraction (recommended).
 #'   REFRACTION_NONE: no atmospheric refraction correction is performed.
 #'   REFRACTION_JPLHOR: for JPL Horizons compatibility testing only; not recommended for normal use.
 #'
 #' @return A list with components:
-#'   \item{lat}{Altitude angle in degrees (corrected for refraction if requested)}
-#'   \item{lon}{Azimuth in degrees clockwise from north}
-#'   \item{dist}{Distance in AU}
-#'   \item{status}{Status code (0 = success)}
+#'   \describe{
+#'     \item{lat}{Altitude angle in degrees (corrected for refraction if requested)}
+#'     \item{lon}{Azimuth in degrees clockwise from north}
+#'     \item{dist}{Distance in AU}
+#'     \item{status}{Status code (0 = success)}
+#'   }
 #'
 #' @export
 #' @examples

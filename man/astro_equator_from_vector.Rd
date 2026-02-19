@@ -17,11 +17,13 @@ astro_equator_from_vector(vector)
 }
 \value{
 A list with components:
+\describe{
 \item{ra}{Right ascension in sidereal hours}
 \item{dec}{Declination in degrees}
 \item{dist}{Distance to the celestial body in AU}
 \item{vec}{Equatorial coordinates in Cartesian vector form}
 \item{status}{Status code (0 = success)}
+}
 
 A list representing equatorial coordinates with elements:
 \itemize{

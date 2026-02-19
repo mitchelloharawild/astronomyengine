@@ -8,8 +8,10 @@ astro_identity_matrix()
 }
 \value{
 A list with components:
+\describe{
 \item{rot}{A 3x3 rotation matrix}
 \item{status}{Status code (0 = success)}
+}
 }
 \description{
 Returns a rotation matrix that has no effect on orientation.

@@ -26,10 +26,12 @@ astro_horizon_from_vector(vector, refraction)
 }
 \value{
 A list with components:
+\describe{
 \item{lat}{Altitude angle in degrees (corrected for refraction if requested)}
 \item{lon}{Azimuth in degrees clockwise from north}
 \item{dist}{Distance in AU}
 \item{status}{Status code (0 = success)}
+}
 
 A list representing horizontal coordinates with elements:
 \itemize{

@@ -27,11 +27,13 @@ astro_vector_from_horizon(sphere, time, refraction)
 }
 \value{
 A list representing a vector in the horizontal system with components:
+\describe{
 \item{x}{North component in AU}
 \item{y}{West component in AU}
 \item{z}{Zenith (up) component in AU}
 \item{t}{The date and time (POSIXct)}
 \item{status}{Status code (0 = success)}
+}
 
 A list representing a horizontal Cartesian vector with elements:
 \itemize{
