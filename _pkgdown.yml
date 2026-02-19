@@ -2,3 +2,140 @@ url: ~
 template:
   bootstrap: 5
 
+development:
+  mode: auto
+
+authors:
+  Mitchell O'Hara-Wild:
+    href: https://mitchelloharawild.com
+
+reference:
+  - title: "Dates and times"
+    desc: "Functions for creating and manipulating time values for astronomy calculations."
+    contents:
+      - astro_current_time
+      - astro_make_time
+
+  - title: "Celestial bodies"
+    desc: "Functions for working with celestial body identifiers."
+    contents:
+      - astro_body
+      - astro_body_code
+      - astro_body_name
+
+  - title: "Position of Sun, Moon, and planets"
+    desc: "Calculate positions of celestial bodies as seen from Earth or the Sun."
+    contents:
+      - astro_helio_vector
+      - astro_geo_vector
+      - astro_equator
+      - astro_ecliptic
+      - astro_ecliptic_longitude
+      - astro_horizon
+      - astro_pair_longitude
+      - astro_bary_state
+
+  - title: "Geographic helper functions"
+    desc: "Functions for working with observer locations on Earth."
+    contents:
+      - astro_observer_vector
+      - astro_vector_observer
+
+  - title: "Rise, set, and culmination times"
+    desc: "Find times when celestial bodies rise, set, or reach specific altitudes."
+    contents:
+      - astro_search_rise_set
+      - astro_search_altitude
+      - astro_search_hour_angle
+
+  - title: "Moon phases"
+    desc: "Calculate and search for specific Moon phases."
+    contents:
+      - astro_moon_phase
+      - astro_search_moon_phase
+      - astro_search_moon_quarter
+      - astro_next_moon_quarter
+
+  - title: "Eclipses and Transits"
+    desc: "Search for lunar eclipses, solar eclipses, and planetary transits."
+    contents:
+      - astro_search_lunar_eclipse
+      - astro_next_lunar_eclipse
+      - search_global_solar_eclipse
+      - next_global_solar_eclipse
+      - search_local_solar_eclipse
+      - next_local_solar_eclipse
+      - astro_search_transit
+      - astro_next_transit
+
+  - title: "Lunar perigee and apogee"
+    desc: "Find times of the Moon's closest and farthest points from Earth."
+    contents:
+      - search_lunar_apsis
+      - next_lunar_apsis
+
+  - title: "Planetary aphelion and perihelion"
+    desc: "Find times of planets' closest and farthest points from the Sun."
+    contents:
+      - search_planet_apsis
+      - next_planet_apsis
+
+  - title: "Visual magnitude and elongation"
+    desc: "Calculate brightness and angular separation of celestial bodies."
+    contents:
+      - astro_illumination
+      - astro_search_peak_magnitude
+      - astro_angle_from_sun
+      - astro_elongation
+      - astro_search_max_elongation
+
+  - title: "Oppositions and conjunctions"
+    desc: "Find when planets reach specific relative positions."
+    contents:
+      - astro_search_relative_longitude
+
+  - title: "Equinoxes, solstices, and apparent solar motion"
+    desc: "Find equinoxes, solstices, and track the Sun's position."
+    contents:
+      - astro_search_sun_longitude
+      - astro_seasons
+      - astro_sun_position
+
+  - title: "Coordinate transforms"
+    desc: "Convert between different astronomical coordinate systems and representations."
+    contents:
+      - astro_rotate_vector
+      - astro_inverse_rotation
+      - astro_combine_rotation
+      - astro_identity_matrix
+      - astro_pivot
+      - astro_vector_from_sphere
+      - astro_sphere_from_vector
+      - astro_equator_from_vector
+      - astro_vector_from_horizon
+      - astro_horizon_from_vector
+      - astro_rotation_EQD_EQJ
+      - astro_rotation_EQD_ECT
+      - astro_rotation_EQD_ECL
+      - astro_rotation_EQD_HOR
+      - astro_rotation_EQJ_EQD
+      - astro_rotation_EQJ_ECT
+      - astro_rotation_EQJ_ECL
+      - astro_rotation_EQJ_HOR
+      - astro_rotation_ECT_EQD
+      - astro_rotation_ECT_EQJ
+      - astro_rotation_ECL_EQD
+      - astro_rotation_ECL_EQJ
+      - astro_rotation_ECL_HOR
+      - astro_rotation_HOR_EQD
+      - astro_rotation_HOR_EQJ
+      - astro_rotation_HOR_ECL
+      - astro_rotation_EQJ_GAL
+      - astro_rotation_GAL_EQJ
+
+  - title: "Observer state"
+    desc: "Functions for calculating observer-related state information."
+    contents:
+      - astro_observer_state
+      - astro_observer_gravity
+      - astro_body
