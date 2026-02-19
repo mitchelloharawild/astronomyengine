@@ -1,6 +1,17 @@
 url: https://pkg.mitchelloharawild.com/astronomyengine/
 template:
   bootstrap: 5
+  bslib:
+    preset: shiny
+    bg: "#0a0e27"
+    fg: "#e8e8e8"
+    primary: "#4a90e2"
+    secondary: "#8b5cf6"
+    success: "#10b981"
+    base_font:
+      google: "Roboto"
+    code_font:
+      google: "Fira Code"
 
 development:
   mode: auto
