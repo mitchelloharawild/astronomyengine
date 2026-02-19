@@ -1,10 +1,27 @@
 Package: astronomy
-Title: What the Package Does (One Line, Title Case)
+Title: R Bindings to the 'Astronomy Engine' C Library
 Version: 0.0.0.9000
-Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Authors@R:
+    c(person(given = "Mitchell",
+             family = "O'Hara-Wild",
+             email = "mail@mitchelloharawild.com",
+             role = c("aut", "cre"),
+             comment = c(ORCID = "0000-0001-6729-7695")),
+      person(given = "Don",
+             family = "Cross",
+             role = c("aut", "cph"),
+             comment = "Author of the bundled Astronomy Engine C library"))
+Description: Provides access to the 'Astronomy Engine' C library
+    (<https://github.com/cosinekitty/astronomy>) by Don Cross. The library
+    calculates positions of the Sun, Moon, and planets, and predicts
+    astronomical events such as rise/set times, lunar phases, equinoxes,
+    solstices, eclipses, and transits. It is based on the 'VSOP87' planetary
+    model and is accurate to within approximately one arcminute. This package
+    bundles the single-file C source so that other R packages can link against
+    it via 'LinkingTo' without shipping their own copy.
 License: MIT + file LICENSE
+URL: https://github.com/mitchelloharawild/astronomy
+BugReports: https://github.com/mitchelloharawild/astronomy/issues
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
