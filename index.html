@@ -5,14 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>What the Package Does (One Line, Title Case) • astronomy</title>
+<title>R Bindings to the Astronomy Engine C Library • astronomy</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="What the Package Does (One Line, Title Case)">
-<meta name="description" content="What the package does (one paragraph).">
-<meta property="og:description" content="What the package does (one paragraph).">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="R Bindings to the Astronomy Engine C Library">
+<meta name="description" content="Provides access to the Astronomy Engine C library (&lt;https://github.com/cosinekitty/astronomy&gt;) by Don Cross. The library calculates positions of the Sun, Moon, and planets, and predicts astronomical events such as rise/set times, lunar phases, equinoxes, solstices, eclipses, and transits. It is based on the VSOP87 planetary model and is accurate to within approximately one arcminute. This package bundles the single-file C source so that other R packages can link against it via LinkingTo without shipping their own copy.">
+<meta property="og:description" content="Provides access to the Astronomy Engine C library (&lt;https://github.com/cosinekitty/astronomy&gt;) by Don Cross. The library calculates positions of the Sun, Moon, and planets, and predicts astronomical events such as rise/set times, lunar phases, equinoxes, solstices, eclipses, and transits. It is based on the VSOP87 planetary model and is accurate to within approximately one arcminute. This package bundles the single-file C source so that other R packages can link against it via LinkingTo without shipping their own copy.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -37,6 +37,7 @@
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
 </form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/mitchelloharawild/astronomy/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -44,9 +45,295 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9">
-What the package does (one paragraph).
-  </main><aside class="col-md-3"><div class="license">
+  <main id="main" class="col-md-9"><div class="section level1">
+<div class="page-header"><h1 id="astronomy">astronomy<a class="anchor" aria-label="anchor" href="#astronomy"></a>
+</h1></div>
+<!-- badges: start -->
+
+<p>The astronomy R package provides R bindings to the <a href="https://github.com/cosinekitty/astronomy" class="external-link">Astronomy Engine</a>. It bundles an up-to-date copy of the <a href="https://github.com/cosinekitty/astronomy" class="external-link">Astronomy Engine</a> C library by Don Cross as a single-file header + source pair. This provides low-level access to the C library so that other R packages can link against it via <code>LinkingTo</code> without bundling their own copy.</p>
+<p><a href="https://github.com/cosinekitty/astronomy" class="external-link">Astronomy Engine</a> is an open-source library for calculating positions of the Sun, Moon, and planets, and for predicting astronomical events such as rise/set times, lunar phases, equinoxes, solstices, eclipses, and transits. It is based on the <a href="https://en.wikipedia.org/wiki/VSOP_(planets)" class="external-link">VSOP87</a> planetary model and is accurate to within approximately ±1 arcminute.</p>
+<div class="section level2">
+<h2 id="using-the-c-library-from-another-package">Using the C library from another package<a class="anchor" aria-label="anchor" href="#using-the-c-library-from-another-package"></a>
+</h2>
+<p>To use the Astronomy Engine C API from another R package:</p>
+<ol style="list-style-type: decimal">
+<li>
+<p>Add <code>astronomy</code> to both <code>Imports</code> and <code>LinkingTo</code> in your <code>DESCRIPTION</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>Imports<span class="sc">:</span> astronomy</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>LinkingTo<span class="sc">:</span> astronomy</span></code></pre></div>
+</li>
+<li>
+<p>Include the header in your C or C++ source files:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;astronomy/astronomy.h&gt;</span></span></code></pre></div>
+</li>
+</ol>
+<div class="section level3">
+<h3 id="key-types">Key types<a class="anchor" aria-label="anchor" href="#key-types"></a>
+</h3>
+<table class="table">
+<colgroup>
+<col width="32%">
+<col width="68%">
+</colgroup>
+<thead><tr class="header">
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>astro_time_t</code></td>
+<td>Date/time in both UT and TT scales</td>
+</tr>
+<tr class="even">
+<td><code>astro_utc_t</code></td>
+<td>Calendar date and time in UTC</td>
+</tr>
+<tr class="odd">
+<td><code>astro_observer_t</code></td>
+<td>Geographic location (latitude, longitude, height)</td>
+</tr>
+<tr class="even">
+<td><code>astro_body_t</code></td>
+<td>Enumeration of supported celestial bodies</td>
+</tr>
+<tr class="odd">
+<td><code>astro_vector_t</code></td>
+<td>3-D Cartesian position vector in AU</td>
+</tr>
+<tr class="even">
+<td><code>astro_state_vector_t</code></td>
+<td>Position (AU) and velocity (AU/day) vector</td>
+</tr>
+<tr class="odd">
+<td><code>astro_equatorial_t</code></td>
+<td>Equatorial coordinates (RA, Dec, distance)</td>
+</tr>
+<tr class="even">
+<td><code>astro_ecliptic_t</code></td>
+<td>Heliocentric ecliptic coordinates</td>
+</tr>
+<tr class="odd">
+<td><code>astro_horizon_t</code></td>
+<td>Topocentric altitude/azimuth coordinates</td>
+</tr>
+<tr class="even">
+<td><code>astro_rotation_t</code></td>
+<td>3×3 rotation matrix for coordinate transforms</td>
+</tr>
+<tr class="odd">
+<td><code>astro_status_t</code></td>
+<td>Success/error code present on every result struct</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level3">
+<h3 id="key-functions">Key functions<a class="anchor" aria-label="anchor" href="#key-functions"></a>
+</h3>
+<table class="table">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead><tr class="header">
+<th>Function</th>
+<th>Purpose</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>Astronomy_MakeTime()</code></td>
+<td>Construct an <code>astro_time_t</code> from calendar components</td>
+</tr>
+<tr class="even">
+<td><code>Astronomy_CurrentTime()</code></td>
+<td>
+<code>astro_time_t</code> for the current system time</td>
+</tr>
+<tr class="odd">
+<td><code>Astronomy_AddDays()</code></td>
+<td>Shift an <code>astro_time_t</code> by a number of days</td>
+</tr>
+<tr class="even">
+<td><code>Astronomy_MakeObserver()</code></td>
+<td>Construct an <code>astro_observer_t</code>
+</td>
+</tr>
+<tr class="odd">
+<td><code>Astronomy_GeoVector()</code></td>
+<td>Geocentric Cartesian position of a body</td>
+</tr>
+<tr class="even">
+<td><code>Astronomy_Equator()</code></td>
+<td>Equatorial (RA/Dec) coordinates of a body</td>
+</tr>
+<tr class="odd">
+<td><code>Astronomy_Horizon()</code></td>
+<td>Topocentric altitude/azimuth for an observer</td>
+</tr>
+<tr class="even">
+<td><code>Astronomy_Seasons()</code></td>
+<td>Equinox and solstice times for a given year</td>
+</tr>
+<tr class="odd">
+<td><code>Astronomy_SearchRiseSetEx()</code></td>
+<td>Next rise or set time of a body</td>
+</tr>
+<tr class="even">
+<td><code>Astronomy_SearchMoonPhase()</code></td>
+<td>Next occurrence of a given lunar phase angle</td>
+</tr>
+<tr class="odd">
+<td><code>Astronomy_SearchMoonQuarter()</code></td>
+<td>Next new/quarter/full moon</td>
+</tr>
+<tr class="even">
+<td><code>Astronomy_Illumination()</code></td>
+<td>Visual magnitude and illuminated fraction</td>
+</tr>
+<tr class="odd">
+<td><code>Astronomy_SearchLunarEclipse()</code></td>
+<td>Next lunar eclipse</td>
+</tr>
+<tr class="even">
+<td><code>Astronomy_SearchGlobalSolarEclipse()</code></td>
+<td>Next global solar eclipse</td>
+</tr>
+<tr class="odd">
+<td><code>Astronomy_SearchLocalSolarEclipse()</code></td>
+<td>Next solar eclipse for an observer</td>
+</tr>
+<tr class="even">
+<td><code>Astronomy_SearchTransit()</code></td>
+<td>Next transit of Mercury or Venus</td>
+</tr>
+<tr class="odd">
+<td><code>Astronomy_SearchMaxElongation()</code></td>
+<td>Next maximum elongation of an inner planet</td>
+</tr>
+<tr class="even">
+<td><code>Astronomy_JupiterMoons()</code></td>
+<td>State vectors for Io, Europa, Ganymede, Callisto</td>
+</tr>
+<tr class="odd">
+<td><code>Astronomy_Libration()</code></td>
+<td>Lunar libration angles</td>
+</tr>
+<tr class="even">
+<td><code>Astronomy_Constellation()</code></td>
+<td>Constellation containing a given sky position</td>
+</tr>
+<tr class="odd">
+<td><code>Astronomy_GravSimInit()</code></td>
+<td>Initialise an n-body gravitational simulator</td>
+</tr>
+</tbody>
+</table>
+<p>All functions return status-bearing structs. Always check <code>status == ASTRO_SUCCESS</code> before using any other fields of the result.</p>
+</div>
+<div class="section level3">
+<h3 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;astronomy/astronomy.h&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">/* Build a time and a topocentric observer in Sydney */</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>astro_time_t     t   <span class="op">=</span> Astronomy_MakeTime<span class="op">(</span><span class="dv">2025</span><span class="op">,</span> <span class="dv">6</span><span class="op">,</span> <span class="dv">21</span><span class="op">,</span> <span class="dv">12</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="fl">0.0</span><span class="op">);</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>astro_observer_t obs <span class="op">=</span> Astronomy_MakeObserver<span class="op">(-</span><span class="fl">33.8688</span><span class="op">,</span> <span class="fl">151.2093</span><span class="op">,</span> <span class="fl">0.0</span><span class="op">);</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">/* Equatorial coordinates of Mars (of-date, with aberration) */</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>astro_equatorial_t eq <span class="op">=</span> Astronomy_Equator<span class="op">(</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>    BODY_MARS<span class="op">,</span> <span class="op">&amp;</span>t<span class="op">,</span> obs<span class="op">,</span> EQUATOR_OF_DATE<span class="op">,</span> ABERRATION</span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="op">);</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>eq<span class="op">.</span>status <span class="op">==</span> ASTRO_SUCCESS<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>    <span class="co">/* eq.ra   -&gt; right ascension in sidereal hours  */</span></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>    <span class="co">/* eq.dec  -&gt; declination in degrees             */</span></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>    <span class="co">/* eq.dist -&gt; distance in AU                     */</span></span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a><span class="co">/* Convert to altitude/azimuth for the same observer */</span></span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>astro_horizon_t hor <span class="op">=</span> Astronomy_Horizon<span class="op">(</span></span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>    <span class="op">&amp;</span>t<span class="op">,</span> obs<span class="op">,</span> eq<span class="op">.</span>ra<span class="op">,</span> eq<span class="op">.</span>dec<span class="op">,</span> REFRACTION_NORMAL</span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a><span class="op">);</span></span>
+<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a><span class="co">/* hor.altitude -&gt; degrees above (+) or below (-) horizon */</span></span>
+<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a><span class="co">/* hor.azimuth  -&gt; degrees clockwise from north            */</span></span>
+<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a><span class="co">/* Find the next sunrise at the same location */</span></span>
+<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a>astro_search_result_t rise <span class="op">=</span> Astronomy_SearchRiseSetEx<span class="op">(</span></span>
+<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a>    BODY_SUN<span class="op">,</span> obs<span class="op">,</span> DIRECTION_RISE<span class="op">,</span> t<span class="op">,</span> <span class="fl">1.0</span><span class="op">,</span> <span class="fl">0.0</span></span>
+<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a><span class="op">);</span></span>
+<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a></span>
+<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a><span class="co">/* Seasons for 2025 */</span></span>
+<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a>astro_seasons_t seasons <span class="op">=</span> Astronomy_Seasons<span class="op">(</span><span class="dv">2025</span><span class="op">);</span></span>
+<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a><span class="co">/* seasons.mar_equinox, jun_solstice, sep_equinox, dec_solstice */</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="supported-bodies">Supported bodies<a class="anchor" aria-label="anchor" href="#supported-bodies"></a>
+</h3>
+<p>The <code>astro_body_t</code> enumeration includes: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto, Sun, Moon, Earth/Moon Barycenter (<code>BODY_EMB</code>), Solar System Barycenter (<code>BODY_SSB</code>), and up to 8 user-defined stars (<code>BODY_STAR1</code>–<code>BODY_STAR8</code>, defined with <code>Astronomy_DefineStar()</code>).</p>
+</div>
+<div class="section level3">
+<h3 id="coordinate-frame-rotations">Coordinate frame rotations<a class="anchor" aria-label="anchor" href="#coordinate-frame-rotations"></a>
+</h3>
+<p>Astronomy Engine provides rotation matrices between all common reference frames:</p>
+<table class="table">
+<colgroup>
+<col width="14%">
+<col width="85%">
+</colgroup>
+<thead><tr class="header">
+<th>Frames</th>
+<th>Function</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>EQJ ↔︎ EQD</td>
+<td>
+<code>Astronomy_Rotation_EQJ_EQD()</code> / <code>Astronomy_Rotation_EQD_EQJ()</code>
+</td>
+</tr>
+<tr class="even">
+<td>EQJ ↔︎ ECL</td>
+<td>
+<code>Astronomy_Rotation_EQJ_ECL()</code> / <code>Astronomy_Rotation_ECL_EQJ()</code>
+</td>
+</tr>
+<tr class="odd">
+<td>EQD ↔︎ HOR</td>
+<td>
+<code>Astronomy_Rotation_EQD_HOR()</code> / <code>Astronomy_Rotation_HOR_EQD()</code>
+</td>
+</tr>
+<tr class="even">
+<td>EQJ ↔︎ GAL</td>
+<td>
+<code>Astronomy_Rotation_EQJ_GAL()</code> / <code>Astronomy_Rotation_GAL_EQJ()</code>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Apply a rotation matrix with <code>Astronomy_RotateVector()</code>.</p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install the released version of astronomy from <a href="https://CRAN.R-project.org" class="external-link">CRAN</a> with:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"astronomy"</span><span class="op">)</span></span></code></pre></div>
+<p>And the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"mitchelloharawild/astronomy"</span><span class="op">)</span></span></code></pre></div>
+</div>
+</div>
+  </main><aside class="col-md-3"><div class="links">
+<h2 data-toc-skip>Links</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/mitchelloharawild/astronomy/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/mitchelloharawild/astronomy/issues" class="external-link">Report a bug</a></li>
+</ul>
+</div>
+
+<div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
@@ -73,18 +360,27 @@ What the package does (one paragraph).
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>First Last <br><small class="roles"> Author, maintainer </small>   </li>
+<li>Mitchell O'Hara-Wild <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-6729-7695" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Don Cross <br><small class="roles"> Author, copyright holder </small>   </li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="https://CRAN.R-project.org/package=astronomy" class="external-link"><img src="https://www.r-pkg.org/badges/version/astronomy" alt="CRAN status"></a></li>
+<li><a href="https://github.com/mitchelloharawild/astronomy/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/mitchelloharawild/astronomy/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+</ul>
+</div>
 
   </aside>
 </div>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by First Last.</p>
+  <p>Developed by Mitchell O’Hara-Wild, Don Cross.</p>
 </div>
 
 <div class="pkgdown-footer-right">

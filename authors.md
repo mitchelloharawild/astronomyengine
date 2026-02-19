@@ -2,16 +2,25 @@
 
 ## Authors
 
-- **First Last**. Author, maintainer.
+- **Mitchell O'Hara-Wild**. Author, maintainer.
+  [](https://orcid.org/0000-0001-6729-7695)
+
+- **Don Cross**. Author, copyright holder.  
+  Author of the bundled Astronomy Engine C library
 
 ## Citation
 
-Last F (2026). *astronomy: What the Package Does (One Line, Title
-Case)*. R package version 0.0.0.9000.
+Source:
+[`DESCRIPTION`](https://github.com/mitchelloharawild/astronomy/blob/main/DESCRIPTION)
+
+O'Hara-Wild M, Cross D (2026). *astronomy: R Bindings to the 'Astronomy
+Engine' C Library*. R package version 0.0.0.9000,
+<https://github.com/mitchelloharawild/astronomy>.
 
     @Manual{,
-      title = {astronomy: What the Package Does (One Line, Title Case)},
-      author = {First Last},
+      title = {astronomy: R Bindings to the 'Astronomy Engine' C Library},
+      author = {Mitchell O'Hara-Wild and Don Cross},
       year = {2026},
       note = {R package version 0.0.0.9000},
+      url = {https://github.com/mitchelloharawild/astronomy},
     }
