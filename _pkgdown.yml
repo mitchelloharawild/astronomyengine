@@ -8,6 +8,10 @@ template:
     primary: "#4a90e2"
     secondary: "#8b5cf6"
     success: "#10b981"
+    code-bg: "#1a1f3a"
+    code-color: "#e8e8e8"
+    pre-bg: "#0d1117"
+    pre-color: "#c9d1d9"
     base_font:
       google: "Roboto"
     code_font:
