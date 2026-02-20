@@ -173,8 +173,6 @@ To use the Astronomy Engine C API from another R package:
     #include <astronomy/astronomy.h>
     ```
 
-### Key types, functions, and more
-
 For detailed documentation of the C API, including key types, functions,
 supported bodies, and coordinate frame rotations, see the [Astronomy
 Engine C API
