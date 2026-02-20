@@ -19,9 +19,10 @@
 #' start <- as.POSIXct("2025-01-01", tz = "UTC")
 #' astro_search_lunar_eclipse(start)
 astro_search_lunar_eclipse <- function(start_time) {
-  start_time <- as.POSIXct(start_time, tz = "UTC")
+  input_tz <- attr(start_time, "tzone")
+  start_time <- as.POSIXct(start_time, tz = input_tz)
   res <- astro_search_lunar_eclipse_(as.numeric(start_time))
-  res$peak <- as.POSIXct(res$peak, tz = "UTC")
+  res$peak <- as.POSIXct(res$peak, tz = input_tz)
   res
 }
 
@@ -49,9 +50,10 @@ astro_search_lunar_eclipse <- function(start_time) {
 #' first_eclipse <- astro_search_lunar_eclipse(start)
 #' next_eclipse <- astro_next_lunar_eclipse(first_eclipse$peak)
 astro_next_lunar_eclipse <- function(prev_eclipse_time) {
-  prev_eclipse_time <- as.POSIXct(prev_eclipse_time, tz = "UTC")
+  input_tz <- attr(prev_eclipse_time, "tzone")
+  prev_eclipse_time <- as.POSIXct(prev_eclipse_time, tz = input_tz)
   res <- astro_next_lunar_eclipse_(as.numeric(prev_eclipse_time))
-  res$peak <- as.POSIXct(res$peak, tz = "UTC")
+  res$peak <- as.POSIXct(res$peak, tz = input_tz)
   res
 }
 
@@ -78,9 +80,10 @@ astro_next_lunar_eclipse <- function(prev_eclipse_time) {
 #' start <- as.POSIXct("2025-01-01", tz = "UTC")
 #' search_global_solar_eclipse(start)
 search_global_solar_eclipse <- function(start_time) {
-  start_time <- as.POSIXct(start_time, tz = "UTC")
+  input_tz <- attr(start_time, "tzone")
+  start_time <- as.POSIXct(start_time, tz = input_tz)
   res <- search_global_solar_eclipse_(as.numeric(start_time))
-  res$peak <- as.POSIXct(res$peak, tz = "UTC")
+  res$peak <- as.POSIXct(res$peak, tz = input_tz)
   res
 }
 
@@ -100,9 +103,10 @@ search_global_solar_eclipse <- function(start_time) {
 #' eclipse1 <- search_global_solar_eclipse(start)
 #' eclipse2 <- next_global_solar_eclipse(eclipse1$peak)
 next_global_solar_eclipse <- function(prev_eclipse_time) {
-  prev_eclipse_time <- as.POSIXct(prev_eclipse_time, tz = "UTC")
+  input_tz <- attr(prev_eclipse_time, "tzone")
+  prev_eclipse_time <- as.POSIXct(prev_eclipse_time, tz = input_tz)
   res <- next_global_solar_eclipse_(as.numeric(prev_eclipse_time))
-  res$peak <- as.POSIXct(res$peak, tz = "UTC")
+  res$peak <- as.POSIXct(res$peak, tz = input_tz)
   res
 }
 
@@ -133,7 +137,8 @@ next_global_solar_eclipse <- function(prev_eclipse_time) {
 #' start <- as.POSIXct("2025-01-01", tz = "UTC")
 #' eclipse <- search_local_solar_eclipse(start, latitude = 37.77, longitude = -122.41)
 search_local_solar_eclipse <- function(start_time, latitude, longitude) {
-  start_time <- as.POSIXct(start_time, tz = "UTC")
+  input_tz <- attr(start_time, "tzone")
+  start_time <- as.POSIXct(start_time, tz = input_tz)
   res <- search_local_solar_eclipse_(
     as.numeric(start_time),
     latitude,
@@ -143,23 +148,23 @@ search_local_solar_eclipse <- function(start_time, latitude, longitude) {
   # Convert time values in each eclipse phase
   res$partial_begin$time <- as.POSIXct(
     res$partial_begin$time,
-    tz = "UTC",
+    tz = input_tz,
     origin = "1970-01-01"
   )
   res$total_begin$time <- as.POSIXct(
     res$total_begin$time,
-    tz = "UTC",
+    tz = input_tz,
     origin = "1970-01-01"
   )
-  res$peak$time <- as.POSIXct(res$peak$time, tz = "UTC", origin = "1970-01-01")
+  res$peak$time <- as.POSIXct(res$peak$time, tz = input_tz, origin = "1970-01-01")
   res$total_end$time <- as.POSIXct(
     res$total_end$time,
-    tz = "UTC",
+    tz = input_tz,
     origin = "1970-01-01"
   )
   res$partial_end$time <- as.POSIXct(
     res$partial_end$time,
-    tz = "UTC",
+    tz = input_tz,
     origin = "1970-01-01"
   )
 
@@ -184,7 +189,8 @@ search_local_solar_eclipse <- function(start_time, latitude, longitude) {
 #' eclipse1 <- search_local_solar_eclipse(start, 37.77, -122.41)
 #' eclipse2 <- next_local_solar_eclipse(eclipse1$peak$time, 37.77, -122.41)
 next_local_solar_eclipse <- function(prev_eclipse_time, latitude, longitude) {
-  prev_eclipse_time <- as.POSIXct(prev_eclipse_time, tz = "UTC")
+  input_tz <- attr(prev_eclipse_time, "tzone")
+  prev_eclipse_time <- as.POSIXct(prev_eclipse_time, tz = input_tz)
   res <- next_local_solar_eclipse_(
     as.numeric(prev_eclipse_time),
     latitude,
@@ -194,23 +200,23 @@ next_local_solar_eclipse <- function(prev_eclipse_time, latitude, longitude) {
   # Convert time values in each eclipse phase
   res$partial_begin$time <- as.POSIXct(
     res$partial_begin$time,
-    tz = "UTC",
+    tz = input_tz,
     origin = "1970-01-01"
   )
   res$total_begin$time <- as.POSIXct(
     res$total_begin$time,
-    tz = "UTC",
+    tz = input_tz,
     origin = "1970-01-01"
   )
-  res$peak$time <- as.POSIXct(res$peak$time, tz = "UTC", origin = "1970-01-01")
+  res$peak$time <- as.POSIXct(res$peak$time, tz = input_tz, origin = "1970-01-01")
   res$total_end$time <- as.POSIXct(
     res$total_end$time,
-    tz = "UTC",
+    tz = input_tz,
     origin = "1970-01-01"
   )
   res$partial_end$time <- as.POSIXct(
     res$partial_end$time,
-    tz = "UTC",
+    tz = input_tz,
     origin = "1970-01-01"
   )
 
@@ -239,6 +245,7 @@ next_local_solar_eclipse <- function(prev_eclipse_time, latitude, longitude) {
 #' start <- as.POSIXct("2025-01-01", tz = "UTC")
 #' astro_search_transit(astro_body["MERCURY"], start)
 astro_search_transit <- function(body, start_time) {
+  input_tz <- attr(start_time, "tzone")
   res <- astro_search_transit_(
     as.integer(body),
     as.numeric(start_time)
@@ -246,7 +253,7 @@ astro_search_transit <- function(body, start_time) {
   res[c("start", "peak", "finish")] <- lapply(
     res[c("start", "peak", "finish")],
     as.POSIXct,
-    tz = "UTC"
+    tz = input_tz
   )
   res
 }
@@ -273,6 +280,7 @@ astro_search_transit <- function(body, start_time) {
 #' transit1 <- astro_search_transit(astro_body["MERCURY"], start)
 #' transit2 <- astro_next_transit(astro_body["MERCURY"], transit1$peak)
 astro_next_transit <- function(body, prev_transit_time) {
+  input_tz <- attr(prev_transit_time, "tzone")
   res <- astro_next_transit_(
     as.integer(body),
     as.numeric(prev_transit_time)
@@ -280,7 +288,7 @@ astro_next_transit <- function(body, prev_transit_time) {
   res[c("start", "peak", "finish")] <- lapply(
     res[c("start", "peak", "finish")],
     as.POSIXct,
-    tz = "UTC"
+    tz = input_tz
   )
   res
 }

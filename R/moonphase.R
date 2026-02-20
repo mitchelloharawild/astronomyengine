@@ -35,7 +35,7 @@ astro_moon_phase <- function(time) {
 #' astro_search_moon_phase(0, start, 30)  # Find next new moon
 astro_search_moon_phase <- function(target_lon, start_time, limit_days) {
   result <- astro_search_moon_phase_(target_lon, start_time, limit_days)
-  as.POSIXct(result, origin = "1970-01-01", tz = "UTC")
+  as.POSIXct(result, origin = "1970-01-01", tz = attr(start_time, "tzone"))
 }
 
 #' Find First Lunar Quarter
@@ -57,7 +57,7 @@ astro_search_moon_phase <- function(target_lon, start_time, limit_days) {
 #' astro_search_moon_quarter(start)
 astro_search_moon_quarter <- function(start_time) {
   result <- astro_search_moon_quarter_(start_time)
-  result$time <- as.POSIXct(result$time, origin = "1970-01-01", tz = "UTC")
+  result$time <- as.POSIXct(result$time, origin = "1970-01-01", tz = attr(start_time, "tzone"))
   result
 }
 
@@ -88,6 +88,6 @@ astro_next_moon_quarter <- function(mq) {
   }
 
   result <- astro_next_moon_quarter_(mq$quarter, mq$time)
-  result$time <- as.POSIXct(result$time, origin = "1970-01-01", tz = "UTC")
+  result$time <- as.POSIXct(result$time, origin = "1970-01-01", tz = attr(mq$time, "tzone"))
   result
 }

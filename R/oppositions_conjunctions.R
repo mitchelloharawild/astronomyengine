@@ -43,5 +43,5 @@ astro_search_relative_longitude <- function(body, target_rel_lon, start_time) {
     start_time
   )
 
-  as.POSIXct(res, tz = "UTC")
+  as.POSIXct(res, tz = attr(start_time, "tzone"))
 }

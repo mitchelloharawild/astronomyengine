@@ -30,13 +30,14 @@
 #' start <- as.POSIXct("2025-03-15", tz = "UTC")
 #' astro_search_sun_longitude(0, start, 10)
 astro_search_sun_longitude <- function(target_lon, start_time, limit_days) {
-  start_time <- as.POSIXct(start_time, tz = "UTC")
+  input_tz <- attr(start_time, "tzone")
+  start_time <- as.POSIXct(start_time, tz = input_tz)
   res <- astro_search_sun_longitude_(
     as.numeric(target_lon),
     as.numeric(start_time),
     as.numeric(limit_days)
   )
-  as.POSIXct(res, tz = "UTC")
+  as.POSIXct(res, tz = input_tz)
 }
 
 #' Equinoxes and Solstices for a Given Year

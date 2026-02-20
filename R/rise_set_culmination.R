@@ -56,7 +56,7 @@ astro_search_rise_set <- function(
   if (is.null(posix)) {
     return(NA_real_)
   }
-  structure(posix, class = c("POSIXct", "POSIXt"), tzone = "UTC")
+  structure(posix, class = c("POSIXct", "POSIXt"), tzone = attr(time, "tzone"))
 }
 
 #' Search for when a body reaches a specified altitude
@@ -116,7 +116,7 @@ astro_search_altitude <- function(
   if (is.null(posix)) {
     return(NA_real_)
   }
-  structure(posix, class = c("POSIXct", "POSIXt"), tzone = "UTC")
+  structure(posix, class = c("POSIXct", "POSIXt"), tzone = attr(time, "tzone"))
 }
 
 #' Search for when a body reaches a specified hour angle
@@ -174,7 +174,7 @@ astro_search_hour_angle <- function(
   result$time <- structure(
     result$time,
     class = c("POSIXct", "POSIXt"),
-    tzone = "UTC"
+    tzone = attr(time, "tzone")
   )
   result
 }

@@ -49,7 +49,7 @@ astro_observer_vector <- function(
     height,
     of_date
   )
-  res$t <- as.POSIXct(res$t, tz = "UTC")
+  res$t <- as.POSIXct(res$t, tz = attr(time, "tzone"))
   res
 }
 
@@ -104,7 +104,7 @@ astro_observer_state <- function(
   }
   time_posix <- as.numeric(time)
   res <- astro_observer_state_(time_posix, latitude, longitude, height, of_date)
-  res$t <- as.POSIXct(res$t, tz = "UTC")
+  res$t <- as.POSIXct(res$t, tz = attr(time, "tzone"))
   res
 }
 

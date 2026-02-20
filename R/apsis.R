@@ -35,8 +35,11 @@
 #' apsis <- search_planet_apsis(astro_body["MARS"], start)
 #' apsis
 search_planet_apsis <- function(body, start_time) {
-  start_time <- as.POSIXct(start_time, tz = "UTC")
-  search_planet_apsis_(as.integer(body), as.numeric(start_time))
+  input_tz <- attr(start_time, "tzone")
+  start_time <- as.POSIXct(start_time, tz = input_tz)
+  result <- search_planet_apsis_(as.integer(body), as.numeric(start_time))
+  result$time <- as.POSIXct(result$time, tz = input_tz)
+  result
 }
 
 #' Find the next planetary apsis in a series
@@ -73,7 +76,9 @@ search_planet_apsis <- function(body, start_time) {
 #' apsis2 <- next_planet_apsis(astro_body["MARS"], apsis1)
 #' apsis3 <- next_planet_apsis(astro_body["MARS"], apsis2)
 next_planet_apsis <- function(body, apsis) {
-  next_planet_apsis_(as.integer(body), apsis)
+  result <- next_planet_apsis_(as.integer(body), apsis)
+  result$time <- as.POSIXct(result$time, tz = attr(apsis$time, "tzone"))
+  result
 }
 
 #' Search for lunar apsis events
@@ -107,9 +112,10 @@ next_planet_apsis <- function(body, apsis) {
 #' apsis$time
 #' apsis$kind
 search_lunar_apsis <- function(start_time) {
-  start_time <- as.POSIXct(start_time, tz = "UTC")
+  input_tz <- attr(start_time, "tzone")
+  start_time <- as.POSIXct(start_time, tz = input_tz)
   res <- search_lunar_apsis_(as.numeric(start_time))
-  res$time <- as.POSIXct(res$time, tz = "UTC")
+  res$time <- as.POSIXct(res$time, tz = input_tz)
   res
 }
 
@@ -159,6 +165,6 @@ next_lunar_apsis <- function(apsis) {
   )
 
   result <- next_lunar_apsis_(apsis_list)
-  result$time <- as.POSIXct(result$time, origin = "1970-01-01", tz = "UTC")
+  result$time <- as.POSIXct(result$time, origin = "1970-01-01", tz = attr(apsis$time, "tzone"))
   result
 }

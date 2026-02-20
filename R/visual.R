@@ -44,7 +44,7 @@ astro_illumination <- function(body, time) {
     as.integer(body),
     as.numeric(time)
   )
-  res$time <- as.POSIXct(res$time, tz = "UTC")
+  res$time <- as.POSIXct(res$time, tz = attr(time, "tzone"))
   res
 }
 
@@ -93,7 +93,7 @@ astro_search_peak_magnitude <- function(body, start_time) {
     as.integer(body),
     as.numeric(start_time)
   )
-  res$time <- as.POSIXct(res$time, tz = "UTC")
+  res$time <- as.POSIXct(res$time, tz = attr(start_time, "tzone"))
   res
 }
 
@@ -153,7 +153,7 @@ astro_elongation <- function(body, time) {
     as.numeric(time)
   )
 
-  res$time <- as.POSIXct(res$time, tz = "UTC")
+  res$time <- as.POSIXct(res$time, tz = attr(time, "tzone"))
   res
 }
 
@@ -188,6 +188,6 @@ astro_search_max_elongation <- function(body, start_time) {
     as.numeric(start_time)
   )
 
-  res$time <- as.POSIXct(res$time, tz = "UTC")
+  res$time <- as.POSIXct(res$time, tz = attr(start_time, "tzone"))
   res
 }
