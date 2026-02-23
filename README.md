@@ -7,8 +7,7 @@
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/astronomyengine)](https://CRAN.R-project.org/package=astronomyengine)
+![CRAN status](https://www.r-pkg.org/badges/version/astronomyengine)
 [![R-CMD-check](https://github.com/mitchelloharawild/astronomyengine/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mitchelloharawild/astronomyengine/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
