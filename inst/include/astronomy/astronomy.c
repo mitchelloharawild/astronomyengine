@@ -2746,7 +2746,7 @@ static const vsop_series_t vsop_rad_Mercury[] =
     { 2, vsop_rad_Mercury_1 }
 };
 
-;
+
 static const vsop_term_t vsop_lon_Venus_0[] =
 {
     { 3.17614666774, 0.00000000000, 0.00000000000 },
@@ -2815,7 +2815,7 @@ static const vsop_series_t vsop_rad_Venus[] =
     { 1, vsop_rad_Venus_1 }
 };
 
-;
+
 static const vsop_term_t vsop_lon_Earth_0[] =
 {
     { 1.75347045673, 0.00000000000, 0.00000000000 },
@@ -2915,7 +2915,7 @@ static const vsop_series_t vsop_rad_Earth[] =
     { 1, vsop_rad_Earth_2 }
 };
 
-;
+
 static const vsop_term_t vsop_lon_Mars_0[] =
 {
     { 6.20347711581, 0.00000000000, 0.00000000000 },
@@ -3059,7 +3059,7 @@ static const vsop_series_t vsop_rad_Mars[] =
     { 2, vsop_rad_Mars_2 }
 };
 
-;
+
 static const vsop_term_t vsop_lon_Jupiter_0[] =
 {
     { 0.59954691494, 0.00000000000, 0.00000000000 },
@@ -3179,7 +3179,7 @@ static const vsop_series_t vsop_rad_Jupiter[] =
     { 5, vsop_rad_Jupiter_1 }
 };
 
-;
+
 static const vsop_term_t vsop_lon_Saturn_0[] =
 {
     { 0.87401354025, 0.00000000000, 0.00000000000 },
@@ -3323,7 +3323,7 @@ static const vsop_series_t vsop_rad_Saturn[] =
     { 1, vsop_rad_Saturn_2 }
 };
 
-;
+
 static const vsop_term_t vsop_lon_Uranus_0[] =
 {
     { 5.48129294297, 0.00000000000, 0.00000000000 },
@@ -3442,7 +3442,7 @@ static const vsop_series_t vsop_rad_Uranus[] =
     { 1, vsop_rad_Uranus_1 }
 };
 
-;
+
 static const vsop_term_t vsop_lon_Neptune_0[] =
 {
     { 5.31188633046, 0.00000000000, 0.00000000000 },
@@ -3505,7 +3505,7 @@ static const vsop_series_t vsop_rad_Neptune[] =
     { 12, vsop_rad_Neptune_0 }
 };
 
-;
+
 
 /** @cond DOXYGEN_SKIP */
 #define VSOPFORMULA(x)    { ASTRO_ARRAYSIZE(x), x }
