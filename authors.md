@@ -14,13 +14,13 @@ Source:
 [`DESCRIPTION`](https://github.com/mitchelloharawild/astronomyengine/blob/main/DESCRIPTION)
 
 O'Hara-Wild M, Cross D (2026). *astronomyengine: R Bindings to the
-'Astronomy Engine' C Library*. R package version 0.0.0.9000,
+'Astronomy Engine' C Library*. R package version 0.1.0,
 <https://github.com/mitchelloharawild/astronomyengine>.
 
     @Manual{,
       title = {astronomyengine: R Bindings to the 'Astronomy Engine' C Library},
       author = {Mitchell O'Hara-Wild and Don Cross},
       year = {2026},
-      note = {R package version 0.0.0.9000},
+      note = {R package version 0.1.0},
       url = {https://github.com/mitchelloharawild/astronomyengine},
     }
