@@ -11,7 +11,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/mitchelloharawild/astronomyengine/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/mitchelloharawild/astronomyengine/blob/v0.1.0/DESCRIPTION)
 
 O'Hara-Wild M, Cross D (2026). *astronomyengine: R Bindings to the
 'Astronomy Engine' C Library*. R package version 0.1.0,
